@@ -48,20 +48,25 @@ def initial_strip():
     pixels.show()
     stay(1)
 
-
 if __name__ == '__main__':
 
-    print("What's the number of players:")
-    count = int(input())
-    for i in range(count):
-        initial_strip()
-        number = random.randint(1, 90)
-        print("Player", i, "will be in ", end='')
-        if number > 60:
-            show_red()
-        elif number < 30:
-            show_blue()
-        else:
-            show_green()
+    players = ["xiaohong", "xiaolan", "xiaoming", "xiaohua"]
+    team_red = []
+    team_blue = []
+    saved_players = players.copy()
 
-    initial_strip()
+    while len(players) > 0:
+        current_player = random.choice(players)
+        players.remove(current_player)
+        team_red.append(current_player)
+        show_red()
+
+        current_player = random.choice(players)
+        players.remove(current_player)
+        team_blue.append(current_player)
+        show_blue()
+
+        print("now team red:", team_red)
+        print("now team blue:", team_blue)
+        print("remaining people:", players)
+        initial_strip()
