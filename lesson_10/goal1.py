@@ -37,6 +37,7 @@ def two_color_rotate(color1, color2):
                     pixels[i + j] = color2
                 else:
                     pixels[i + j - num_pixels] = color2
+
             pixels.show()
             stay(0.05)
 

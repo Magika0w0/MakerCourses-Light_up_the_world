@@ -53,6 +53,7 @@ if __name__ == '__main__':
     for team1 in teams:
         for team2 in teams:
             if not team1 == team2:
+
                 two_color_rotate(team1, team2)
 
 

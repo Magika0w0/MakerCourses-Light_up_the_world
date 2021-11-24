@@ -1,20 +1,41 @@
+import time
+import board
+import neopixel
 import random
 
-def two_color_rotate(team1, team2):
-    print(team1, team2)
+# NeoPixels must be connected to D10, D12, D18 or D21 to work.
+pixel_pin = board.D21
+
+# The number of NeoPixels
+num_pixels = 144
+
+# The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
+# For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
+ORDER = neopixel.GRB
+
+pixels = neopixel.NeoPixel(
+    pixel_pin, num_pixels, brightness=0.2, auto_write=False, pixel_order=ORDER
+)
+
+
+def stay(number):
+    time.sleep(number)
+
+
+def initial_strip():
+    pixels.fill((0, 0, 0))
+    pixels.show()
+    stay(1)
+
 
 if __name__ == '__main__':
 
-    team_red_color = (255, 0, 0)
-    team_green_color = (0, 255, 0)
-    team_blue_color = (0, 0, 255)
+    color1 = (255, 0, 0)
+    color2 = (0, 255, 0)
+    while True:
+        for i in range(num_pixels):
+            pixels.fill(color1) # 把整条灯带设置成 color1
+            pixels[i] = color2 # 陆续把第i个灯珠设置成color2
 
-    teams = [team_red_color, team_blue_color, team_green_color]
-    random.shuffle(teams)
-
-    for team1 in teams:
-        for team2 in teams:
-            if not team1 == team2:
-                two_color_rotate(team1, team2)
-                temp = input()
-                print(temp)
+            pixels.show()
+            stay(0.05)
